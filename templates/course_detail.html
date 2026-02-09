@@ -1,0 +1,93 @@
+
+{% extends "base.html" %}
+{% block title %}Course Details{% endblock %}
+
+{% block content %}
+<h2>{{ course.title }}</h2>
+
+<p><strong>Description:</strong></p>
+<p>{{ course.description }}</p>
+
+<p>
+    <strong>Instructor:</strong>
+    {{ course.teacher.name }}
+</p>
+
+<hr>
+
+{% if session.get("user_role") == "student" %}
+    {% if enrolled %}
+        <p><em>You are enrolled in this course.</em></p>
+
+        <a href="/unenroll/{{ course.id }}"
+           class="btn btn-danger"
+           onclick="return confirm('Are you sure you want to unenroll?');">
+           Unenroll
+        </a>
+    {% else %}
+        <a href="/enroll/{{ course.id }}" class="btn btn-primary">
+            Enroll in this course
+        </a>
+    {% endif %}
+{% endif %}
+
+<hr>
+
+<h3>Lessons</h3>
+
+{% if session.get("user_role") == "teacher" or enrolled %}
+
+    {% if course.lessons %}
+    <div class="grid">
+        {% for lesson in course.lessons %}
+        <div class="card">
+            <h4>{{ lesson.title }}</h4>
+            <p>{{ lesson.content }}</p>
+
+            {% if lesson.files %}
+            <strong>Files:</strong>
+            <ul>
+                {% for file in lesson.files %}
+                <li>
+                    <a href="/uploads/{{ file.filename }}" class="btn-link">
+                        {{ file.filename }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if session.get("user_role") == "teacher" %}
+            <div style="margin-top:15px; display:flex; gap:10px;">
+                <a href="/teacher/lesson/{{ lesson.id }}/edit"
+                   class="btn btn-secondary">
+                    Edit
+                </a>
+
+                <a href="/teacher/lesson/{{ lesson.id }}/delete"
+                   class="btn btn-danger"
+                   onclick="return confirm('Delete this lesson?');">
+                    Delete
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No lessons added yet.</p>
+    {% endif %}
+
+    {% if session.get("user_role") == "teacher" %}
+        <br>
+        <a href="/teacher/course/{{ course.id }}/lesson/add"
+           class="btn btn-primary">
+            + Add Lesson
+        </a>
+    {% endif %}
+
+{% else %}
+    <p><em>Enroll to view lessons.</em></p>
+{% endif %}
+
+{% endblock %}

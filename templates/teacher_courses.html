@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Manage Courses{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Your Courses</h2>
+    <a href="/teacher/create-course" class="btn btn-primary">
+        + Create Course
+    </a>
+</div>
+
+{% if courses %}
+<div class="grid">
+    {% for course in courses %}
+    <div class="card">
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description }}</p>
+
+        <div style="margin-top:15px; display:flex; gap:10px;">
+            <a href="/course/{{ course.id }}" class="btn btn-secondary">
+                View
+            </a>
+
+            <a href="/teacher/course/{{ course.id }}/edit" class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="/teacher/course/{{ course.id }}/delete"
+               class="btn btn-danger"
+               onclick="return confirm('Delete this course?');">
+                Delete
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No courses yet.</p>
+{% endif %}
+
+{% endblock %}

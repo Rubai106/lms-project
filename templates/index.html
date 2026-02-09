@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Home | LMS{% endblock %}
+
+{% block content %}
+
+<div class="hero">
+    <h1>
+        Learning Management System 🚀
+    </h1>
+
+    <p class="hero-subtitle">
+        A modern academic LMS for students and instructors.
+        <br>
+        Manage courses, lessons, and learning — all in one place.
+    </p>
+
+    {% if not session.get("user_id") %}
+        <div class="hero-actions">
+            <a href="/signup" class="btn primary-btn">Get Started</a>
+            <a href="/login" class="btn secondary-btn">Login</a>
+        </div>
+    {% else %}
+        <div class="hero-actions">
+            <a href="/dashboard" class="btn primary-btn">Go to Dashboard</a>
+        </div>
+    {% endif %}
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <h3>📚 Course Management</h3>
+        <p>
+            Teachers can create, edit, and manage courses easily.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📝 Lessons & Files</h3>
+        <p>
+            Add lessons with text and upload PDFs, docs, or images.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🎓 Student Enrollment</h3>
+        <p>
+            Students can enroll, unenroll, and track their learning.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🔒 Role-Based Access</h3>
+        <p>
+            Separate dashboards and permissions for students & teachers.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

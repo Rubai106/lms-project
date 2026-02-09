@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Edit Course{% endblock %}
+
+{% block content %}
+<h2>Edit Course</h2>
+
+<div class="card" style="max-width:500px;">
+<form method="POST">
+    <label>Course Title</label>
+    <input type="text" name="title" value="{{ course.title }}" required>
+
+    <label>Description</label>
+    <textarea name="description" rows="5" required>{{ course.description }}</textarea>
+
+    <br><br>
+    <button class="btn btn-primary">Update Course</button>
+    <a href="/teacher/courses" class="btn btn-secondary">Cancel</a>
+</form>
+</div>
+{% endblock %}

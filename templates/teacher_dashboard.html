@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Teacher Dashboard</h1>
+    <p>Welcome back, {{ user_name }} 👋</p>
+</div>
+
+<div class="grid-2">
+    <div class="card">
+        <h3>📚 Manage Courses</h3>
+        <p>Create, edit, and organize your courses.</p>
+        <a href="/teacher/courses" class="btn primary-btn">
+            Go to Courses
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📄 Lessons & Files</h3>
+        <p>Add lessons with text and file uploads.</p>
+        <span class="badge">Inside courses</span>
+    </div>
+</div>
+{% endblock %}

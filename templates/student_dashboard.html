@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">Student Dashboard</h2>
+
+<p class="welcome-text">
+    Welcome back, <strong>{{ user_name }}</strong> 👋
+</p>
+
+<h3 class="section-title">Your Enrolled Courses</h3>
+
+{% if courses %}
+    <div class="courses-grid">
+        {% for course in courses %}
+            <div class="course-card">
+                <h3 class="course-title">
+                    <a href="/course/{{ course.id }}">
+                        {{ course.title }}
+                    </a>
+                </h3>
+
+                <p class="course-desc">
+                    {{ course.description }}
+                </p>
+
+                <div class="course-actions">
+                    <span class="badge enrolled">Enrolled</span>
+
+                    <a class="btn danger-btn"
+                       href="/unenroll/{{ course.id }}"
+                       onclick="return confirm('Unenroll from this course?');">
+                        Unenroll
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="empty-text">
+        You are not enrolled in any courses yet.
+    </p>
+{% endif %}
+
+{% endblock %}

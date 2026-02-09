@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Lesson{% endblock %}
+
+{% block content %}
+<h2>Edit Lesson</h2>
+
+<form class="form" method="POST">
+    <label>Lesson Title</label>
+    <input type="text" name="title" value="{{ lesson.title }}" required>
+
+    <label>Lesson Content</label>
+    <textarea name="content" rows="6" required>{{ lesson.content }}</textarea>
+
+    <button type="submit">Update Lesson</button>
+</form>
+
+<br>
+<a href="/course/{{ lesson.course.id }}">← Back to course</a>
+{% endblock %}

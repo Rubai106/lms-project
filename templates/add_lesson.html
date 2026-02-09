@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Add Lesson{% endblock %}
+
+{% block content %}
+<h2>Add Lesson</h2>
+
+<form class="form" method="POST" enctype="multipart/form-data">
+    <label>Lesson Title</label>
+    <input type="text" name="title" required>
+
+    <label>Lesson Content</label>
+    <textarea name="content" rows="6" required></textarea>
+    <label>Upload File (PDF / DOC)</label>
+    <input type="file" name="file">
+    <button type="submit">Add Lesson</button>
+</form>
+
+<br>
+<a href="/course/{{ course.id }}">← Back to course</a>
+{% endblock %}

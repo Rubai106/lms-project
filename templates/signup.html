@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Signup | LMS{% endblock %}
+
+{% block content %}
+<h2>Signup</h2>
+
+<form class="form" method="POST">
+    <label>Full Name</label><br>
+    <input type="text" name="name" placeholder="Enter your full name" required><br><br>
+
+    <label>Email</label><br>
+    <input type="email" name="email" placeholder="Enter your email" required><br><br>
+
+    <label>Password</label><br>
+    <input type="password" name="password" placeholder="Create a password" required><br><br>
+
+    <label>Role</label><br>
+    <select name="role" required>
+        <option value="">Select role</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+    </select><br><br>
+
+    <button type="submit">Create Account</button>
+</form>
+{% endblock %}

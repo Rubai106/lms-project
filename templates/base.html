@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}LMS{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/" class="logo">LMS</a>
+
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+
+            {% if session.get("user_role") == "student" %}
+                <a href="/courses" class="nav-link">Courses</a>
+            {% endif %}
+
+            {% if session.get("user_role") == "teacher" %}
+                <a href="/teacher/courses" class="nav-link">Manage Courses</a>
+            {% endif %}
+        </div>
+
+        <div class="nav-right">
+            {% if session.get("user_id") %}
+                <span class="user-chip">
+                    👋 {{ session.get("user_name") }}
+                </span>
+                <a href="/logout" class="btn logout-btn">Logout</a>
+            {% else %}
+                <a href="/login" class="btn ghost-btn">Login</a>
+                <a href="/signup" class="btn primary-btn">Signup</a>
+            {% endif %}
+        </div>
+    </nav>
+
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

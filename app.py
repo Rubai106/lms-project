@@ -139,7 +139,7 @@ def signup():
         flash("Account created. Please login.")
         return redirect(url_for("login"))
 
-    return render_template("signup.html")
+    return render_template("signup.html", hide_nav_auth=True)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -156,7 +156,7 @@ def login():
 
         return redirect(url_for("dashboard"))
 
-    return render_template("login.html")
+    return render_template("login.html", hide_nav_auth=True)
 
 
 @app.route("/logout")

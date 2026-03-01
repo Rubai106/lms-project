@@ -14,11 +14,18 @@ from werkzeug.utils import secure_filename
 # ======================
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+IS_VERCEL = os.environ.get("VERCEL", False)
+
+if IS_VERCEL:
+    DB_PATH = "/tmp/lms.db"
+    UPLOAD_FOLDER = "/tmp/uploads"
+else:
+    DB_PATH = os.path.join(BASE_DIR, "instance", "lms.db")
+    UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "dev-secret-key"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///lms.db"
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret-key")
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16MB
@@ -410,8 +417,9 @@ def uploaded_file(filename):
 # RUN
 # ======================
 
+with app.app_context():
+    db.create_all()
+
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
 

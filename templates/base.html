@@ -28,8 +28,10 @@
                 </span>
                 <a href="/logout" class="btn logout-btn">Logout</a>
             {% else %}
-                <a href="/login" class="btn ghost-btn">Login</a>
-                <a href="/signup" class="btn primary-btn">Signup</a>
+                {% if not hide_nav_auth %}
+                    <a href="/login" class="btn ghost-btn">Login</a>
+                    <a href="/signup" class="btn primary-btn">Signup</a>
+                {% endif %}
             {% endif %}
         </div>
     </nav>

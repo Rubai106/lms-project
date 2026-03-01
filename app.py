@@ -117,7 +117,7 @@ class LessonFile(db.Model):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", hide_nav_auth=True)
 
 
 @app.route("/signup", methods=["GET", "POST"])

@@ -464,14 +464,24 @@ a {
     background: #1d4ed8;
 }
 
-/* Secondary / ghost (FIXED) */
+/* Secondary / ghost — outside navbar */
 .ghost-btn {
     background: #f1f5f9;
-    color: #1f2937;           /* DARK text */
+    color: #1f2937;
     border: 1px solid #e5e7eb;
 }
 .ghost-btn:hover {
     background: #e2e8f0;
+}
+
+/* Ghost inside navbar — keep transparent on dark bg */
+.navbar .ghost-btn {
+    background: transparent;
+    color: #e5e7eb;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.navbar .ghost-btn:hover {
+    background: rgba(255,255,255,0.1);
 }
 
 /* Danger */

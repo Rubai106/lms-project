@@ -53,12 +53,3 @@ python app.py
 ```
 
 The app will be available at **http://127.0.0.1:5000**
-
-### Deploy to Vercel
-
-1. Push this repo to GitHub
-2. Import the project on [vercel.com](https://vercel.com)
-3. Set the **SECRET_KEY** environment variable in Vercel project settings
-4. Deploy!
-
-> **Note:** Vercel uses serverless functions with an ephemeral filesystem. SQLite data and uploaded files will not persist between cold starts. For production use, consider switching to a hosted database (e.g. PostgreSQL on Supabase/Neon).
